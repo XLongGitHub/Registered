@@ -15,7 +15,6 @@
 	
 		caption {
 			width:200px;
-			//height:80px;
 			font-size:20px;
 			align:center;
 		}
@@ -24,7 +23,7 @@
 <body>
 	<table>
 		<caption>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;register</caption>
-		<form action="registerDetail.jsp" method="post" onsubmit="return check(this);">
+		<form action="register" method="post" onsubmit="return check(this);">
 			<tr>
 				<td style="font-size: 20px;">username:</td>
 				<td><input type="text" name="username" onfocus=true /></td>
@@ -48,18 +47,8 @@
 	
 	var check = function() {
 		
-		//alert("nihoa");
-		//return false;
-		/* alert(document.getElementById("userename").innerHTML);
-		alert(document.getElementById("userename").value);
-		return false;
-		var username = document.getElementById("userename").value;
-		var password = document.getElementById("passoword");
-		alert(username.value); */
-		/* return false; */
 		var form = document.forms[0];
 		var errstr = "";
-		//return false;
 		if (form.username.value == null || form.username.value.trim() == "") {
 			errstr += "username can't be empty \n";
 			form.username.focus();
