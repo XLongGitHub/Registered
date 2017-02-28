@@ -1,5 +1,4 @@
 package org.at.action;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,21 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.at.util.DB;
 
-public class RegisterAction extends HttpServlet {
+public class LoginAction  extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		System.out.println("register");
-		if (!isExits(username, password)) {
-			if (register(username, password)) {
-				this.getServletConfig().getServletContext().getRequestDispatcher("/registerSuccess.jsp").forward(req, resp);
-			} else {
-				resp.sendRedirect("registerFailure.jsp");
-			}
+		System.out.println("login");
+		if (isExits(username, password)) {
+			this.getServletConfig().getServletContext().getRequestDispatcher("/loginSuccess.jsp").forward(req, resp);
 		} else {
-			resp.sendRedirect("registerFailure.jsp");
+			resp.sendRedirect("loginFailure.jsp");
 		}
 	}
 
@@ -34,14 +29,13 @@ public class RegisterAction extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
 	}
-
+	
 	public static boolean isExits(String username, String password) {
 		Connection conn = DB.getConn();
-		String sql = "select * from user where username = '" + username + "'";
+		String sql = "select * from user where username = '" + username+"'";
 		ResultSet rs = DB.getRs(conn, sql);
 		try {
-			if (!rs.next())
-				return false;
+			if (!rs.next()) return false;
 			if (rs.getString("username").equals(username) && rs.getString("password").equals(password))
 				return true;
 		} catch (SQLException e) {
@@ -49,15 +43,5 @@ public class RegisterAction extends HttpServlet {
 		}
 		return false;
 	}
-	
-	public static boolean register(String username, String password) {
-		Connection conn  = DB.getConn();
-		String sql = "insert into user value( null, "+username+","+password+")";
-		int result = DB.insert(conn, sql);
-		
-		return result == 1;
-		
-	}
-	
 
 }

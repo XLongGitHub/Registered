@@ -7,6 +7,6 @@
 <title>registerSuccess</title>
 </head>
 <body>
-	 <%=request.getParameter("username") %>  have finish register.
+	welcome <%=request.getParameter("username") %>  login
 </body>
 </html>

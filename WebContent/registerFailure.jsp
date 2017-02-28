@@ -7,6 +7,7 @@
 <title>registerFailure</title>
 </head>
 <body>
-registerFailure	
+<h2>registerFailure</h2>
+<h3>Your name is have been registered!</h3>
 </body>
 </html>

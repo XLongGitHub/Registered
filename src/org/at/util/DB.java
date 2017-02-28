@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.at.domain.User;
-
 public class DB {
 
 	public static Connection getConn() {
@@ -55,6 +53,32 @@ public class DB {
 		}
 		return rs;
 	}
+	
+	
+	public static int insert(Connection conn, String sql) {
+		Statement stmt = null;
+		int count = 0;
+		
+		try {
+			stmt = conn.createStatement();
+			count = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public static int insert(Statement stmt, String sql) {
+		int count = 0;
+		
+		try {
+			count = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 	
 	public static void main(String[] args) {
 		Connection conn;
