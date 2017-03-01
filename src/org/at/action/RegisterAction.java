@@ -1,43 +1,22 @@
 package org.at.action;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.at.util.DB;
 
-public class RegisterAction extends HttpServlet {
+import com.opensymphony.xwork2.ActionSupport;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-		System.out.println("register");
-		if (!isExits(username, password)) {
-			if (register(username, password)) {
-				this.getServletConfig().getServletContext().getRequestDispatcher("/registerSuccess.jsp").forward(req, resp);
-			} else {
-				resp.sendRedirect("registerFailure.jsp");
-			}
-		} else {
-			resp.sendRedirect("registerFailure.jsp");
-		}
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
-	}
+public class RegisterAction extends ActionSupport {
+	private String username;
+	private String password;
+	private String password2;
 
 	public static boolean isExits(String username, String password) {
 		Connection conn = DB.getConn();
 		String sql = "select * from user where username = '" + username + "'";
+		System.out.println(username);
 		ResultSet rs = DB.getRs(conn, sql);
 		try {
 			if (!rs.next())
@@ -49,15 +28,52 @@ public class RegisterAction extends HttpServlet {
 		}
 		return false;
 	}
-	
+
 	public static boolean register(String username, String password) {
-		Connection conn  = DB.getConn();
-		String sql = "insert into user value( null, "+username+","+password+")";
+		Connection conn = DB.getConn();
+		String sql = "insert into user value( null, '" + username + "','" + password + "')";
 		int result = DB.insert(conn, sql);
-		
+
 		return result == 1;
-		
+
 	}
-	
+
+	@Override
+	public String execute() throws Exception {
+
+		if (!isExits(username, password)) {
+			if (register(username, password)) {
+				return SUCCESS;
+			} else {
+				return ERROR;
+			}
+		} else {
+			return ERROR;
+		}
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
 
 }

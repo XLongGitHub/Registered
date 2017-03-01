@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>register</title>
+<title>login</title>
  	<style>
 		table {
 			width: 200px;
@@ -20,10 +20,11 @@
 		}
 	</style>
 </head>
+
 <body>
 	<table>
-		<caption>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;register</caption>
-		<form action="register" method="post" onsubmit="return check(this);">
+		<caption>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;login</caption>
+		<form action="login" method="post" onsubmit="return check(this);">
 			<tr>
 				<td style="font-size: 20px;">username:</td>
 				<td><input type="text" name="username" onfocus=true /></td>
@@ -33,16 +34,12 @@
 				<td><input type="password" name="password"  /></td>
 			</tr>
 			<tr>
-				<td style="font-size: 20px;">confirm password:</td>
-				<td><input type="password" name="password2"  /></td>
-			</tr>
-			<tr>
 				<td><input type="submit" value="submit" onclick="check"/></td>
 				<td><input type="reset" value="reset"></td>
 			</tr>
 		</form>
 	</table>
-	
+	<a href="registerForm">register</a>
 	<script>
 	
 		String.prototype.trim = function() {
@@ -61,15 +58,7 @@
 			errstr += "passwor can't be empty \n";
 			form.password.focus();
 		}
-		if (form.password2.value == null || form.password2.value.trim() == "") {
-			errstr += "passwor can't be empty \n";
-			form.password2.focus();
-		}
-/* 		if (form.password.value != form.password2.vaule) {
-			errstr += "password must be simlar to ";	
-			alert(form.password.value);
-			alert(form.password2.value);
-		} */
+		
 		if (errstr != "") {
 			alert(errstr);
 			return false;

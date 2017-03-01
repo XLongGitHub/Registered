@@ -9,9 +9,9 @@
 <body>
 <h2>registerFailure</h2>
 I'm sorry, your username or password is error, please try again
-<a href="login.jsp">Login</a>
+<a href="loginForm">Login</a>
 <br>
 If you don't be part of us, please register now
-<a href="register.jsp">Register</a>	
+<a href="registerForm">Register</a>	
 </body>
 </html>
