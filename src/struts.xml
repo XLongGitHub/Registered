@@ -10,21 +10,67 @@
 	<!-- 所有的Action定义都应该放在package下 -->
 	<package name="at" namespace="/" extends="struts-default">
 
-		<action name="login" class="org.at.action.LoginAction">
-			<!-- 定义三个逻辑视图和物理资源之间的映射 -->
+		<!-- <action name="login" class="org.at.action.LoginAction"> -->
+		<!-- struts.xml中SaveUserAction的class属性有没有对应好Spring配置文件中id="saveUserAction"的Action,
+		需要注入的话，则指向spring中的bean
+		即<action name="saveUserAction'  class="saveUserAction"/>.......
+		直接绕过访问导致空指针错误
+		 -->
+		 
+		<action name="login" class="loginAction">
 			<result name="error">/WEB-INF/content/loginFailure.jsp</result>
 			<result name="success">/WEB-INF/content/loginSuccess.jsp</result>
 		</action>
 		
-		<action name="register" class="org.at.action.RegisterAction">
-			<!-- 定义三个逻辑视图和物理资源之间的映射 -->
+		<action name="loginOut" class="loginAction" method="out">
+			<result>/WEB-INF/content/loginForm.jsp</result>
+		</action>
+		
+		<action name="register" class="registerAction">
 			<result name="error">/WEB-INF/content/registerFailure.jsp</result>
 			<result name="success">/WEB-INF/content/registerSuccess.jsp</result>
 		</action>
 		
+		<action name="getClass" class="classAction" method="lass" >
+			<result name="success">/WEB-INF/content/classesDetail.jsp</result>
+		</action>	
+		
+		<action name="addClazz" class="classAction" method="add" >
+			<result name="success" type="chain">
+				<param name="actionName">getClass</param>
+			</result>
+		</action>
+		
+		<action name="modifyAction" class="classAction" method="modify" >
+			<result name="success" type="chain">
+				<param name="actionName">getClass</param>
+			</result>
+		</action>
+		
+		<action name="deleteAction" class="classAction" method="delete" >
+			<result name="success" type="chain">
+				<param name="actionName">getClass</param>
+			</result>
+		</action>
+			 
+		<action name="chooseMyAction" class="myClassAction" method="choose" >
+			<result name="success" type="chain">
+				<param name="actionName">listMyAction</param>
+			</result>
+		</action> 
+		
+		<action name="listMyAction" class="myClassAction" method="list" >
+			<result name="success">/WEB-INF/content/myClass.jsp</result>
+		</action> 
+		
+		<action name="deleteMyAction" class="myClassAction" method="delete" >
+			<result name="success" type="chain">
+				<param name="actionName">listMyAction</param>
+			</result>
+		</action> 
+		
 		<action name="*">
 			<result>/WEB-INF/content/{1}.jsp</result>
 		</action>
-		
 	</package>
 </struts>

@@ -7,6 +7,7 @@
 <title>registerSuccess</title>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 	 <%=request.getParameter("username") %>  have finish register.
 </body>
 </html>

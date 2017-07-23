@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>registerFailure</title>
+<title>loginFailure</title>
 </head>
 <body>
 <h2>registerFailure</h2>

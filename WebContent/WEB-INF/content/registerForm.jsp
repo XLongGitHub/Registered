@@ -21,6 +21,7 @@ caption {
 </style>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 	<table>
 		<caption>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;register</caption>
 		<form action="register" method="post" onsubmit="return check(this);">

@@ -4,9 +4,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>registerSuccess</title>
+<title>loginSuccess</title>
 </head>
 <body>
-	welcome <%=request.getParameter("username") %>  login
-</body>
+	<%
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		//int user_id = Integer.parseInt(request.getParameter("id"));
+		/* out.write(username); */
+		/* session.setParamater("username", username); */
+		session.setAttribute("username", username);
+		/* session.setAttribute("password", password); */
+	%>
+	<jsp:include page="header.jsp">
+		<jsp:param name="username" value="username"/>
+	</jsp:include>
+	welcome <%=request.getParameter("username") %>
+	<%-- <%=request.getParameter("user_id")+"fdihfodsajfoa" %> --%>
+	<%=session.getAttribute("user_id")%>
+	<%
+		session.setAttribute("uername", username);
+		//session.setAttribute("user_id", user_id);
+	%>
 </html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	
+	<!-- <bean id="daoTemplate" abstract="true" lazy-init="true" p:sessionFactory-ref="sessionFactory">
+	<property name="num" value="101"/>
+	</bean>
+	<bean id="userDao" class="org.at.dao.impl.UserDaoHibernate4" parent="daoTemplate"/>
+	<bean id="classesDao" class="org.at.dao.impl.ClassesDaoHibernate4" parent="daoTemplate"/> -->
+
+	
+	<bean id="daoTemplate2" abstract="true" lazy-init="true" 
+		  p:userDao-ref="userDao" 
+		  p:classesDao-ref="classesDao"/>
+	
+	
+	<bean id="userService" class="org.at.service.impl.UserServiceImpl" parent="daoTemplate2"/>
+	<bean id="classesService" class="org.at.service.impl.ClassesServiceImpl" parent="daoTemplate2"/>
+	
+	<bean name="loginAction" class="org.at.action.LoginAction">
+		<property name="userService" ref="userService"/>
+		<property name="classesService" ref="classesService"/>
+	</bean>
+	
+	<bean name="registerAction" class="org.at.action.RegisterAction">
+		<property name="userService" ref="userService"/>
+		<property name="classesService" ref="classesService"/>
+	</bean>
+	
+	<bean name="classAction" class="org.at.action.ClassAction">
+		<property name="userService" ref="userService"/>
+		<property name="classesService" ref="classesService"/>
+	</bean>
+	
+	<bean name="myClassAction" class="org.at.action.MyClassAction">
+		<property name="userService" ref="userService"/>
+		<property name="classesService" ref="classesService"/>
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	
+	
+	
+	
+	<bean id="transactionManager" class=
+		"org.springframework.orm.hibernate4.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory"/>	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut id="leePointcut"
+			expression="bean(userService) or bean(classesService) "/>
+		<aop:advisor advice-ref="txAdvice" 
+			pointcut-ref="leePointcut"/>
+	</aop:config>	
+ </beans>

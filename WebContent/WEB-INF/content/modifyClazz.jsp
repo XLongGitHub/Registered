@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style>
+h3 {
+	align: center;
+	font-color: red;
+}
+</style>
+</head>
+<body>
+<jsp:include page="header.jsp"/>
+	<br>
+	<hr>
+	<hr>
+	<h3>
+		<font color="red">footer</font>
+	</h3>
+	<table>
+		<form action="modifyAction" method="post">
+		<tr hidden=true>
+			<input type="text" name="clazz.id"
+				value=<%=request.getParameter("id")%>>
+		</tr>
+		<tr>
+			<td><input type="text" name="clazz.classname"
+				value=<%=request.getParameter("classname")%>></td>
+		</tr>
+		<tr>
+			<td><input type="text" name="clazz.location"
+				value=<%=request.getParameter("location")%>></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="modify"></td>
+		</tr>
+		</form>
+	</table>
+</body>
+</html>

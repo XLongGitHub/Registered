@@ -91,7 +91,7 @@ public class DB {
 			rs = stmt.executeQuery(sql);
 			System.out.println(rs.next());
 //			User user = new User();
-//			rs.next();  //·µ»ØµÄrsÖ¸ÏòÊý¾ÝÆðµã£¬´ËÊ±ÓÎ±ê´¦¼ÇÂ¼ÄÚÈÝÎª¿Õ
+//			rs.next();  //ï¿½ï¿½ï¿½Øµï¿½rsÖ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã£¬ï¿½ï¿½Ê±ï¿½Î±ê´¦ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½  è¿”å›žç»“æžœæ‰§è¡Œ0
 //			user.init(rs);
 //			System.out.println(user.getUsername() + "  " + user.getPassword() );
 			
